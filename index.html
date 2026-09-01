@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日系風珍珠奶茶 - 繁體中文聽音辨字</title>
+    <title>日系動漫風珍珠奶茶 - 繁體中文聽音辨字</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500;700&family=Mochiy+Pop+One&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans TC', 'Kiwi Maru', sans-serif;
-            background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 50%, #fef3c7 100%);
+            background: linear-gradient(135deg, #fdf2f8 0%, #fff7ed 50%, #fef3c7 100%);
             touch-action: manipulation;
         }
         .title-font {
@@ -17,15 +17,15 @@
         }
         /* Boba Cup Glass Glassmorphism */
         .glass-cup {
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(8px);
-            border: 4px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 30px rgba(180, 83, 9, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.8);
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 30px rgba(180, 83, 9, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.9);
         }
         /* Milk Tea Fluid Gradient */
         .tea-fluid {
-            background: linear-gradient(180deg, #fef08a 0%, #fde047 10%, #f59e0b 60%, #d97706 100%);
-            box-shadow: inset 0 5px 15px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(180deg, #fef08a 0%, #fde047 15%, #f59e0b 60%, #d97706 100%);
+            box-shadow: inset 0 5px 15px rgba(255, 255, 255, 0.6);
         }
         /* Pearl Drop Animation */
         @keyframes pearlDrop {
@@ -55,10 +55,9 @@
         .animate-shake {
             animation: shake 0.4s ease-in-out;
         }
-        /* Floating animations */
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(1deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
         }
         .animate-float {
             animation: float 3s ease-in-out infinite;
@@ -68,110 +67,101 @@
 <body class="min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 text-amber-950 select-none overflow-x-hidden">
 
     <!-- Top Header Navigation -->
-    <header class="w-full max-w-4xl flex justify-between items-center bg-white/80 backdrop-blur-md px-4 py-3 rounded-3xl shadow-lg border-2 border-amber-200 z-10">
+    <header class="w-full max-w-4xl flex justify-between items-center bg-white/90 backdrop-blur-md px-4 py-3 rounded-3xl shadow-lg border-2 border-amber-200 z-10">
         <div class="flex items-center space-x-2">
             <span class="text-3xl sm:text-4xl">🧋</span>
             <div>
-                <h1 class="title-font text-lg sm:text-2xl text-amber-800 tracking-wide">日式珍奶學中文</h1>
-                <p class="text-xs text-amber-600 font-medium">聽語音選漢字 • 收集5顆珍珠做珍奶！</p>
+                <h1 class="title-font text-base sm:text-xl text-amber-800 tracking-wide">日系少女的珍奶小舖</h1>
+                <p class="text-xs text-amber-600 font-medium">聽語音選漢字 • 收集5顆珍珠做給客人！</p>
             </div>
         </div>
 
         <!-- Level Selector -->
         <div class="flex items-center space-x-1 sm:space-x-2 bg-amber-50 p-1.5 rounded-2xl border border-amber-200">
-            <button onclick="setLevel(1)" id="lvl-1-btn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md">初級 (4選1)</button>
-            <button onclick="setLevel(2)" id="lvl-2-btn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">中級 (6選1)</button>
-            <button onclick="setLevel(3)" id="lvl-3-btn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">高級 (9選1)</button>
+            <button onclick="setLevel(1)" id="lvl-1-btn" class="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md">初級(4選)</button>
+            <button onclick="setLevel(2)" id="lvl-2-btn" class="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">中級(6選)</button>
+            <button onclick="setLevel(3)" id="lvl-3-btn" class="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">高級(9選)</button>
         </div>
     </header>
 
     <!-- Main Game Container -->
     <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-4 my-3 items-center flex-1">
         
-        <!-- Left Side: Anime Shopkeeper Girl & Boba Cup Counter (5 Cols) -->
-        <section class="md:col-span-5 flex flex-col items-center justify-center bg-amber-100/60 backdrop-blur-sm p-4 rounded-3xl border-2 border-amber-200/80 shadow-md relative min-h-[360px]">
+        <!-- Left Side: Anime Girl & Boba Cup Counter (5 Cols) -->
+        <section class="md:col-span-5 flex flex-col items-center justify-center bg-amber-100/60 backdrop-blur-sm p-4 rounded-3xl border-2 border-amber-200 shadow-md relative min-h-[380px]">
             
-            <!-- Speech Bubble from Shopkeeper (STRICTLY NO TEXT HINT OF ANSWER) -->
+            <!-- Speech Bubble from Shopkeeper (NO TEXT HINT HERE) -->
             <div class="relative bg-white border-2 border-amber-400 px-4 py-2.5 rounded-2xl shadow-md mb-2 w-full max-w-xs text-center animate-float">
                 <p id="speech-text" class="text-xs sm:text-sm font-bold text-amber-900 flex items-center justify-center gap-1">
                     <span>點擊右邊聽發音找字喔！</span> 🎧
                 </p>
-                <!-- Tail for speech bubble -->
                 <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-r-2 border-b-2 border-amber-400 rotate-45"></div>
             </div>
 
-            <!-- Shopkeeper Anime Character SVG -->
+            <!-- Anime Girl with Round Glasses Style SVG -->
             <div class="relative w-44 h-48 sm:w-52 sm:h-56 flex justify-center items-center">
                 <svg id="shopkeeper-svg" viewBox="0 0 200 220" class="w-full h-full drop-shadow-xl transition-all duration-300">
                     <!-- Twin Tails Hair (Back) -->
-                    <path d="M 35,80 Q 15,110 25,160 Q 35,120 50,90 Z" fill="#5D4037"/>
-                    <path d="M 165,80 Q 185,110 175,160 Q 165,120 150,90 Z" fill="#5D4037"/>
-                    <!-- Hair Ribbons -->
-                    <circle cx="45" cy="80" r="8" fill="#F43F5E"/>
-                    <circle cx="155" cy="80" r="8" fill="#F43F5E"/>
+                    <path d="M 35,75 Q 15,105 25,155 Q 35,115 50,85 Z" fill="#4B3621"/>
+                    <path d="M 165,75 Q 185,105 175,155 Q 165,115 150,85 Z" fill="#4B3621"/>
+                    <circle cx="43" cy="75" r="8" fill="#F43F5E"/>
+                    <circle cx="157" cy="75" r="8" fill="#F43F5E"/>
 
-                    <!-- Body & Maid Apron -->
-                    <path d="M 60,140 Q 100,130 140,140 L 155,220 L 45,220 Z" fill="#FFF1F2"/>
-                    <path d="M 75,145 L 125,145 L 135,220 L 65,220 Z" fill="#FB7185"/> <!-- Pink Collar/Apron -->
-                    <path d="M 90,150 L 110,150 L 115,220 L 85,220 Z" fill="#FFF"/> <!-- White Center -->
-                    <!-- Apron Boba Badge -->
-                    <circle cx="100" cy="180" r="10" fill="#F59E0B"/>
-                    <circle cx="97" cy="182" r="2" fill="#374151"/>
-                    <circle cx="103" cy="182" r="2" fill="#374151"/>
-                    <circle cx="100" cy="177" r="2" fill="#374151"/>
+                    <!-- Uniform / Maid Apron -->
+                    <path d="M 55,135 Q 100,125 145,135 L 160,220 L 40,220 Z" fill="#334155"/>
+                    <path d="M 75,140 L 125,140 L 135,220 L 65,220 Z" fill="#FFF1F2"/>
+                    <path d="M 90,145 L 110,145 L 115,220 L 85,220 Z" fill="#FB7185"/>
+                    <!-- Cup Icon on Apron -->
+                    <circle cx="100" cy="180" r="9" fill="#F59E0B"/>
 
                     <!-- Head Base -->
-                    <ellipse cx="100" cy="95" rx="48" ry="44" fill="#FFDFC4"/>
+                    <ellipse cx="100" cy="90" rx="46" ry="42" fill="#FFDFC4"/>
 
-                    <!-- Bangs Hair (Front) -->
-                    <path d="M 52,85 C 50,50 150,50 148,85 C 130,65 115,80 100,70 C 85,80 70,65 52,85 Z" fill="#6D4C41"/>
+                    <!-- Front Bangs Hair -->
+                    <path d="M 54,80 C 50,45 150,45 146,80 C 130,60 115,75 100,65 C 85,75 70,60 54,80 Z" fill="#5C4033"/>
 
-                    <!-- EYES LAYER (Dynamic ID for Expressions) -->
+                    <!-- CUTE ROUND GLASSES -->
+                    <g id="glasses-group">
+                        <circle cx="78" cy="90" r="16" fill="none" stroke="#334155" stroke-width="2.5"/>
+                        <circle cx="122" cy="90" r="16" fill="none" stroke="#334155" stroke-width="2.5"/>
+                        <line x1="94" y1="90" x2="106" y2="90" stroke="#334155" stroke-width="2.5"/>
+                    </g>
+
+                    <!-- EYES EXPRESSIONS -->
                     <g id="face-happy" class="transition-opacity duration-300">
-                        <!-- Happy Curved Eyes -->
-                        <path d="M 72,92 Q 82,82 90,92" fill="none" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
-                        <path d="M 110,92 Q 118,82 128,92" fill="none" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
-                        <!-- Blush -->
-                        <ellipse cx="68" cy="102" rx="8" ry="4" fill="#FB7185" opacity="0.6"/>
-                        <ellipse cx="132" cy="102" rx="8" ry="4" fill="#FB7185" opacity="0.6"/>
-                        <!-- Smile Mouth -->
-                        <path d="M 88,106 Q 100,122 112,106 Z" fill="#F43F5E"/>
+                        <path d="M 68,88 Q 78,78 88,88" fill="none" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M 112,88 Q 122,78 132,88" fill="none" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
+                        <ellipse cx="66" cy="97" rx="6" ry="3" fill="#FDA4AF" opacity="0.7"/>
+                        <ellipse cx="134" cy="97" rx="6" ry="3" fill="#FDA4AF" opacity="0.7"/>
+                        <path d="M 88,102 Q 100,116 112,102 Z" fill="#E11D48"/>
                     </g>
 
                     <g id="face-sad" class="hidden transition-opacity duration-300">
-                        <!-- Sad / Disappointed Eyes (> <) -->
-                        <path d="M 72,88 L 88,96 M 72,96 L 88,88" fill="none" stroke="#4B5563" stroke-width="3.5" stroke-linecap="round"/>
-                        <path d="M 112,88 L 128,96 M 112,96 L 128,88" fill="none" stroke="#4B5563" stroke-width="3.5" stroke-linecap="round"/>
-                        <!-- Sweat Drop -->
-                        <path d="M 142,75 Q 148,82 144,86 Q 140,86 142,75 Z" fill="#38BDF8"/>
-                        <!-- Disappointed Mouth -->
-                        <path d="M 90,112 Q 100,104 110,112" fill="none" stroke="#4B5563" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M 68,85 L 86,93 M 68,93 L 86,85" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M 114,85 L 132,93 M 114,93 L 132,85" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M 140,72 Q 146,78 142,82 Q 138,82 140,72 Z" fill="#38BDF8"/>
+                        <path d="M 90,108 Q 100,100 110,108" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
                     </g>
 
                     <g id="face-excited" class="hidden transition-opacity duration-300">
-                        <!-- Sparkling Star Eyes -->
-                        <text x="70" y="98" font-size="18" fill="#F59E0B">★</text>
-                        <text x="110" y="98" font-size="18" fill="#F59E0B">★</text>
-                        <!-- Big Blush -->
-                        <circle cx="68" cy="102" r="7" fill="#F43F5E" opacity="0.7"/>
-                        <circle cx="132" cy="102" r="7" fill="#F43F5E" opacity="0.7"/>
-                        <!-- Big Open Joyful Mouth -->
-                        <path d="M 85,104 Q 100,130 115,104 Z" fill="#E11D48"/>
+                        <text x="68" y="94" font-size="16" fill="#F59E0B">★</text>
+                        <text x="114" y="94" font-size="16" fill="#F59E0B">★</text>
+                        <circle cx="66" cy="97" rx="7" ry="3.5" fill="#E11D48" opacity="0.8"/>
+                        <circle cx="134" cy="97" rx="7" ry="3.5" fill="#E11D48" opacity="0.8"/>
+                        <path d="M 85,100 Q 100,124 115,100 Z" fill="#BE123C"/>
                     </g>
                 </svg>
             </div>
 
             <!-- Boba Cup & Counter Display -->
             <div class="mt-2 flex items-center space-x-4 bg-amber-200/50 p-2.5 rounded-2xl border border-amber-300/80 w-full justify-around">
-                <!-- Boba Cup Visual -->
+                <!-- Boba Cup Visual with Thick Straw -->
                 <div class="relative w-20 h-28 glass-cup rounded-b-3xl rounded-t-md overflow-hidden flex flex-col justify-end p-1">
-                    <!-- Straw -->
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-3 h-14 bg-amber-300 rounded-full border border-amber-400 z-0 rotate-6"></div>
+                    <!-- Thick Boba Straw -->
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-16 bg-gradient-to-r from-rose-400 to-amber-400 rounded-full border border-white z-0 rotate-6 shadow-md"></div>
                     
-                    <!-- Milk Tea Fill Level based on pearls count -->
-                    <div id="tea-level" class="w-full tea-fluid rounded-b-2xl transition-all duration-500 z-10 flex flex-wrap-reverse justify-center items-end p-1 gap-1" style="height: 40%;">
-                        <!-- Dynamic Pearl Elements will be placed here -->
-                    </div>
+                    <!-- Milk Tea Fluid Level -->
+                    <div id="tea-level" class="w-full tea-fluid rounded-b-2xl transition-all duration-500 z-10 flex flex-wrap-reverse justify-center items-end p-1 gap-1" style="height: 40%;"></div>
                 </div>
 
                 <!-- Pearl Progress Stats -->
@@ -195,45 +185,39 @@
         </section>
 
         <!-- Right Side: Pure Audio Trigger + Word Selection Board (7 Cols) -->
-        <section class="md:col-span-7 flex flex-col items-center justify-between bg-white/90 backdrop-blur-md p-5 rounded-3xl border-2 border-amber-200 shadow-xl min-h-[360px]">
+        <section class="md:col-span-7 flex flex-col items-center justify-between bg-white/95 backdrop-blur-md p-5 rounded-3xl border-2 border-amber-200 shadow-xl min-h-[380px]">
             
             <!-- VOICE AUDIO BUTTON (STRICT REQUIREMENT: NO TEXT HINT NEAR IT) -->
             <div class="w-full flex flex-col items-center my-2">
-                <span class="text-xs font-bold text-amber-600 mb-1">① 點擊喇叭聽發音 (Listen to Voice)</span>
-                
                 <button id="play-audio-btn" onclick="playCurrentAudio()" class="pulse-audio relative group bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white p-5 rounded-full shadow-lg border-4 border-white transition transform active:scale-95 flex items-center justify-center">
-                    <!-- Big Loudspeaker Icon -->
                     <svg class="w-10 h-10 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
                     </svg>
                 </button>
-                <span class="text-xs font-bold text-amber-800 mt-2 bg-amber-100 px-3 py-1 rounded-full">點我再聽一次音檔 🔊</span>
             </div>
 
             <!-- Instruction Step 2 -->
             <div class="w-full border-t border-amber-100 pt-3">
-                <p class="text-center text-xs font-bold text-amber-600 mb-3">② 聽完聲音後，點選對應的繁體中文字：</p>
+                <p class="text-center text-xs font-bold text-amber-600 mb-3">請聆聽上方語音，點選對應的繁體中文字：</p>
                 
                 <!-- Dynamic Word Options Grid -->
-                <div id="options-grid" class="grid grid-cols-2 gap-3 w-full max-w-md mx-auto">
-                    <!-- Dynamic Buttons Generated in JS -->
-                </div>
+                <div id="options-grid" class="grid grid-cols-2 gap-3 w-full max-w-md mx-auto"></div>
             </div>
 
         </section>
     </main>
 
-    <!-- Victory Modal (Shown when 5 pearls gathered) -->
+    <!-- Victory Modal (Shown when 5 pearls gathered & Girl hands over boba) -->
     <div id="victory-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-50 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-        <div class="bg-gradient-to-b from-amber-50 to-orange-100 border-4 border-amber-400 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl transform scale-90 transition-transform duration-300 id='victory-box'">
+        <div class="bg-gradient-to-b from-amber-50 to-orange-100 border-4 border-amber-400 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl transform scale-90 transition-transform duration-300">
             <div class="text-6xl mb-2 animate-bounce">🧋✨</div>
-            <h2 class="title-font text-2xl sm:text-3xl text-amber-900 mb-2">珍珠奶茶做好了！</h2>
-            <p class="text-amber-700 font-bold text-sm mb-4">太厲害了！好喝的珍奶送給客人囉！</p>
+            <h2 class="title-font text-2xl sm:text-3xl text-amber-900 mb-1">珍奶做好了！</h2>
+            <p class="text-amber-700 font-bold text-sm mb-3">少女開心地把插好吸管的珍珠奶茶遞給你！</p>
 
-            <!-- Customer Smiling Reaction -->
-            <div class="bg-white/80 p-3 rounded-2xl border border-amber-200 mb-5 flex items-center justify-center space-x-3">
-                <span class="text-4xl">😋</span>
-                <span class="text-xs font-bold text-amber-800 text-left">客人小明：「這杯珍珠奶茶太好喝了！謝謝你！」</span>
+            <!-- Interactive Handing Over Boba Visual Card -->
+            <div class="bg-white p-4 rounded-2xl border-2 border-amber-300 mb-5 flex flex-col items-center shadow-inner">
+                <div class="text-5xl mb-2">👩‍🍳 ➔ 🥤</div>
+                <p class="text-xs font-bold text-amber-900">「太棒了！這是特別為你做的珍珠奶茶，請慢用！」</p>
             </div>
 
             <button onclick="resetGame()" class="w-full py-3.5 bg-gradient-to-r from-emerald-400 to-green-500 text-white font-extrabold text-lg rounded-2xl shadow-lg border-2 border-white hover:brightness-105 active:scale-95 transition">
@@ -242,13 +226,13 @@
         </div>
     </div>
 
-    <!-- Footer Copyright/Info -->
-    <footer class="text-xs text-amber-600 font-medium py-2">
-        適合海外兒童 (6-10歲) 繁體中文聽力記憶自主學習
+    <!-- Footer Info -->
+    <footer class="text-xs text-amber-600 font-medium py-1">
+        專為海外兒童設計 • 繁體中文聽力記憶自主學習
     </footer>
 
     <script>
-        // Target Character Set from Request
+        // Target Character Set
         const CHAR_SET = ['人', '口', '大', '小', '土', '力', '白', '天', '山', '日', '月', '中', '文', '上', '下'];
 
         // Game State Variables
@@ -258,7 +242,6 @@
         let pearlsCollected = 0;
         let isAnswering = false;
 
-        // Audio Context Synthesizer (No external sound file dependency)
         let audioCtx = null;
 
         function initAudio() {
@@ -267,7 +250,6 @@
             }
         }
 
-        // Web Audio Synthesizer Effects
         function playTone(freq, duration, type='sine') {
             try {
                 initAudio();
@@ -285,13 +267,13 @@
         }
 
         function playCorrectSound() {
-            playTone(523.25, 0.15); // C5
-            setTimeout(() => playTone(659.25, 0.15), 100); // E5
-            setTimeout(() => playTone(783.99, 0.3), 200);  // G5
+            playTone(523.25, 0.15);
+            setTimeout(() => playTone(659.25, 0.15), 100);
+            setTimeout(() => playTone(783.99, 0.3), 200);
         }
 
         function playWrongSound() {
-            playTone(220, 0.2, 'sawtooth'); // A3
+            playTone(220, 0.2, 'sawtooth');
             setTimeout(() => playTone(180, 0.3, 'sawtooth'), 150);
         }
 
@@ -302,25 +284,23 @@
             });
         }
 
-        // Web Speech API Pronunciation (Mandarin zh-TW)
         function speakChineseChar(char) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // Stop ongoing speech
+                window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(char);
                 utterance.lang = 'zh-TW';
-                utterance.rate = 0.8; // Slightly slower for children clarity
-                utterance.pitch = 1.1; // Friendly tone
+                utterance.rate = 0.8;
+                utterance.pitch = 1.1;
                 window.speechSynthesis.speak(utterance);
             }
         }
 
-        // Set Difficulty Level
         function setLevel(lvl) {
             currentLevel = lvl;
             [1, 2, 3].forEach(i => {
                 const btn = document.getElementById(`lvl-${i}-btn`);
                 if (i === lvl) {
-                    btn.className = "px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md";
+                    btn.className = "px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md";
                 } else {
                     btn.className = "px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200";
                 }
@@ -328,7 +308,6 @@
             nextRound();
         }
 
-        // Change Anime Girl Face Expression
         function setExpression(expr) {
             document.getElementById('face-happy').classList.add('hidden');
             document.getElementById('face-sad').classList.add('hidden');
@@ -343,58 +322,43 @@
             }
         }
 
-        // Start Next Quiz Round
         function nextRound() {
             isAnswering = false;
-            
-            // Pick Random Target Character
             const randIdx = Math.floor(Math.random() * CHAR_SET.length);
             targetChar = CHAR_SET[randIdx];
 
-            // Determine option grid count
             let count = 4;
             if (currentLevel === 2) count = 6;
             if (currentLevel === 3) count = 9;
 
-            // Generate Distractors
             let optionsSet = new Set([targetChar]);
             while (optionsSet.size < count) {
                 const randomDistractor = CHAR_SET[Math.floor(Math.random() * CHAR_SET.length)];
                 optionsSet.add(randomDistractor);
             }
 
-            // Shuffle Options
             currentOptions = Array.from(optionsSet).sort(() => Math.random() - 0.5);
-
-            // Render Option Buttons
             renderOptionsGrid();
 
-            // Set Speech Bubble Text (NO character name reveal)
-            document.getElementById('speech-text').innerHTML = `<span>按語音鈕聽題目喔！</span> 🎧`;
+            document.getElementById('speech-text').innerHTML = `<span>請點擊上方喇叭聽題目！</span> 🎧`;
 
-            // Auto Play Audio for current word
             setTimeout(() => {
                 playCurrentAudio();
             }, 300);
         }
 
-        // Trigger Audio Play back
         function playCurrentAudio() {
             initAudio();
             speakChineseChar(targetChar);
-            
-            // Pulse animation trigger on audio button
             const audioBtn = document.getElementById('play-audio-btn');
             audioBtn.classList.add('scale-110');
             setTimeout(() => audioBtn.classList.remove('scale-110'), 300);
         }
 
-        // Render Cards Options
         function renderOptionsGrid() {
             const grid = document.getElementById('options-grid');
             grid.innerHTML = '';
 
-            // Adjust grid CSS cols depending on count
             if (currentLevel === 1) {
                 grid.className = "grid grid-cols-2 gap-3 w-full max-w-sm mx-auto";
             } else if (currentLevel === 2) {
@@ -412,51 +376,39 @@
             });
         }
 
-        // Handle User Answer Selection
         function checkAnswer(selectedChar, elementBtn) {
             if (isAnswering) return;
             initAudio();
 
             if (selectedChar === targetChar) {
-                // CORRECT ANSWER
                 isAnswering = true;
                 playCorrectSound();
                 setExpression('happy');
 
-                // Button Correct styling
                 elementBtn.className = elementBtn.className.replace('bg-amber-50', 'bg-emerald-400 text-white border-emerald-500 scale-105');
-                
-                // Encourage message
                 document.getElementById('speech-text').innerHTML = `<span class="text-emerald-700 font-extrabold">太棒了！答對了！🎉</span>`;
 
-                // Add Pearl
                 pearlsCollected++;
                 updateBobaCupVisuals();
 
                 if (pearlsCollected >= 5) {
-                    // VICTORY LEVEL COMPLETE!
                     setTimeout(() => {
                         playVictoryFanfare();
                         setExpression('excited');
                         showVictoryModal();
                     }, 700);
                 } else {
-                    // Move to Next Round
                     setTimeout(() => {
                         nextRound();
                     }, 1200);
                 }
 
             } else {
-                // INCORRECT ANSWER
                 playWrongSound();
                 setExpression('sad');
 
-                // Button Wrong visual styling & shake
                 elementBtn.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-600', 'animate-shake');
-                
-                // Disappointed speech bubble text
-                document.getElementById('speech-text').innerHTML = `<span class="text-rose-600 font-extrabold">看錯囉，再試試看！❤️</span>`;
+                document.getElementById('speech-text').innerHTML = `<span class="text-rose-600 font-extrabold">答錯囉，再聽一次試試！❤️</span>`;
 
                 setTimeout(() => {
                     elementBtn.classList.remove('animate-shake');
@@ -464,21 +416,15 @@
             }
         }
 
-        // Update Boba Glass Pearls & Progress bar
         function updateBobaCupVisuals() {
-            // Update Numbers
             document.getElementById('pearl-count-num').innerText = pearlsCollected;
-
-            // Update Tea Level height percentage
             const teaLevel = document.getElementById('tea-level');
             teaLevel.style.height = `${40 + (pearlsCollected * 10)}%`;
 
-            // Append a physical black pearl inside boba glass
             const newPearl = document.createElement('div');
             newPearl.className = "w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-br from-gray-700 via-gray-900 to-black rounded-full border border-gray-600 shadow-md animate-pearl m-0.5";
             teaLevel.appendChild(newPearl);
 
-            // Update bottom 5 slot indicator dots
             const slotsContainer = document.getElementById('pearl-slots');
             const slots = slotsContainer.children;
             for (let i = 0; i < 5; i++) {
@@ -490,14 +436,12 @@
             }
         }
 
-        // Show Win Modal
         function showVictoryModal() {
             const modal = document.getElementById('victory-modal');
             modal.classList.remove('opacity-0', 'pointer-events-none');
             modal.classList.add('opacity-100');
         }
 
-        // Reset Game to start fresh boba cup
         function resetGame() {
             pearlsCollected = 0;
             document.getElementById('tea-level').innerHTML = '';
@@ -511,7 +455,6 @@
             nextRound();
         }
 
-        // Initialize Game On Page Load
         window.onload = () => {
             nextRound();
         };
