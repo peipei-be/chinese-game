@@ -66,7 +66,6 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 text-amber-950 select-none overflow-x-hidden">
 
-    <!-- Top Header Navigation -->
     <header class="w-full max-w-4xl flex justify-between items-center bg-white/90 backdrop-blur-md px-4 py-3 rounded-3xl shadow-lg border-2 border-amber-200 z-10">
         <div class="flex items-center space-x-2">
             <span class="text-3xl sm:text-4xl">🧋</span>
@@ -84,21 +83,20 @@
         </div>
     </header>
 
-    <!-- Main Game Container -->
     <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-4 my-3 items-center flex-1">
         
         <!-- Left Side: Anime Girl & Boba Cup Counter (5 Cols) -->
         <section class="md:col-span-5 flex flex-col items-center justify-center bg-amber-100/60 backdrop-blur-sm p-4 rounded-3xl border-2 border-amber-200 shadow-md relative min-h-[380px]">
             
-            <!-- Speech Bubble from Shopkeeper (NO TEXT HINT HERE) -->
+            <!-- Speech Bubble from Shopkeeper (NO TEXT HINT) -->
             <div class="relative bg-white border-2 border-amber-400 px-4 py-2.5 rounded-2xl shadow-md mb-2 w-full max-w-xs text-center animate-float">
                 <p id="speech-text" class="text-xs sm:text-sm font-bold text-amber-900 flex items-center justify-center gap-1">
-                    <span>點擊右邊聽發音找字喔！</span> 🎧
+                    <span>歡迎光臨！請點擊右邊聽發音找字！</span> 🎧
                 </p>
                 <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-r-2 border-b-2 border-amber-400 rotate-45"></div>
             </div>
 
-            <!-- Anime Girl with Round Glasses Style SVG -->
+            <!-- Anime Girl with Round Glasses & Twin Tails Style SVG -->
             <div class="relative w-44 h-48 sm:w-52 sm:h-56 flex justify-center items-center">
                 <svg id="shopkeeper-svg" viewBox="0 0 200 220" class="w-full h-full drop-shadow-xl transition-all duration-300">
                     <!-- Twin Tails Hair (Back) -->
@@ -184,7 +182,6 @@
             </div>
         </section>
 
-        <!-- Right Side: Pure Audio Trigger + Word Selection Board (7 Cols) -->
         <section class="md:col-span-7 flex flex-col items-center justify-between bg-white/95 backdrop-blur-md p-5 rounded-3xl border-2 border-amber-200 shadow-xl min-h-[380px]">
             
             <!-- VOICE AUDIO BUTTON (STRICT REQUIREMENT: NO TEXT HINT NEAR IT) -->
