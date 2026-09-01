@@ -1,460 +1,1713 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日系動漫風珍珠奶茶 - 繁體中文聽音辨字</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500;700&family=Mochiy+Pop+One&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans TC', 'Kiwi Maru', sans-serif;
-            background: linear-gradient(135deg, #fdf2f8 0%, #fff7ed 50%, #fef3c7 100%);
-            touch-action: manipulation;
-        }
-        .title-font {
-            font-family: 'Mochiy Pop One', 'Noto Sans TC', cursive;
-        }
-        /* Boba Cup Glass Glassmorphism */
-        .glass-cup {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(8px);
-            border: 4px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 20px 30px rgba(180, 83, 9, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.9);
-        }
-        /* Milk Tea Fluid Gradient */
-        .tea-fluid {
-            background: linear-gradient(180deg, #fef08a 0%, #fde047 15%, #f59e0b 60%, #d97706 100%);
-            box-shadow: inset 0 5px 15px rgba(255, 255, 255, 0.6);
-        }
-        /* Pearl Drop Animation */
-        @keyframes pearlDrop {
-            0% { transform: translateY(-120px) scale(0.3); opacity: 0; }
-            60% { transform: translateY(10px) scale(1.1); opacity: 1; }
-            80% { transform: translateY(-4px) scale(0.95); }
-            100% { transform: translateY(0) scale(1); }
-        }
-        .animate-pearl {
-            animation: pearlDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        /* Sound Pulse Wave */
-        @keyframes soundWave {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 18px rgba(245, 158, 11, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
-        }
-        .pulse-audio {
-            animation: soundWave 2s infinite;
-        }
-        /* Bounce & Shake */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-8px); }
-            40%, 80% { transform: translateX(8px); }
-        }
-        .animate-shake {
-            animation: shake 0.4s ease-in-out;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>珍珠奶茶學漢字</title>
+
+<style>
+
+/* =========================
+   基本設定
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+
+    background:
+        radial-gradient(circle at 20% 20%, #fff8f0, transparent 30%),
+        linear-gradient(135deg, #f8e6d6, #fff7ef);
+
+    min-height: 100vh;
+    color: #65402c;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* =========================
+   遊戲外框
+========================= */
+
+.game {
+    max-width: 1250px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 20px;
+}
+
+/* =========================
+   標題
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.title {
+    font-size: 38px;
+    font-weight: 900;
+    color: #704128;
+    text-shadow: 3px 3px 0 #fff;
+}
+
+.title span {
+    color: #ef7890;
+}
+
+.status {
+    display: flex;
+    gap: 25px;
+    background: rgba(255,255,255,.85);
+    padding: 14px 28px;
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(100,60,30,.12);
+}
+
+.status-item {
+    text-align: center;
+}
+
+.status-label {
+    font-size: 15px;
+}
+
+.status-number {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* =========================
+   主畫面
+========================= */
+
+.main {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 15px;
+}
+
+/* =========================
+   左側題目
+========================= */
+
+.quiz-card {
+    background: rgba(255,255,255,.88);
+    border-radius: 30px;
+    padding: 28px;
+    box-shadow: 0 8px 25px rgba(100,60,30,.12);
+}
+
+.level {
+    display: inline-block;
+    background: #ef8293;
+    color: white;
+    padding: 9px 20px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.question-title {
+    font-size: 27px;
+    font-weight: bold;
+    margin: 18px 0;
+}
+
+.character-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.character {
+    width: 230px;
+    height: 230px;
+
+    background: #fffaf5;
+
+    border: 4px solid #f3c8b2;
+
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "KaiTi", "DFKai-SB", serif;
+
+    font-size: 150px;
+
+    color: #684025;
+
+    box-shadow:
+        inset 0 0 0 2px white;
+}
+
+.sound-button {
+    width: 65px;
+    height: 65px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #ef7c8d;
+    color: white;
+
+    font-size: 28px;
+
+    box-shadow: 0 5px 10px rgba(200,80,100,.25);
+}
+
+.sound-button:hover {
+    transform: scale(1.08);
+}
+
+/* =========================
+   答案
+========================= */
+
+.answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+
+    margin-top: 25px;
+}
+
+.answer {
+    min-height: 75px;
+
+    border: 3px solid #f0d4c3;
+
+    background: #fff;
+
+    border-radius: 20px;
+
+    font-family: "KaiTi", "DFKai-SB", serif;
+
+    font-size: 42px;
+
+    color: #694328;
+
+    transition: .2s;
+}
+
+.answer:hover {
+    transform: translateY(-3px);
+    border-color: #ef8494;
+}
+
+.answer.correct {
+    background: #e6f6df;
+    border-color: #68b85a;
+    color: #4e9b45;
+}
+
+.answer.wrong {
+    background: #ffe2e2;
+    border-color: #e47777;
+    color: #c95757;
+}
+
+/* =========================
+   回饋文字
+========================= */
+
+.feedback {
+    min-height: 50px;
+
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+}
+
+.feedback.good {
+    color: #4e9b45;
+}
+
+.feedback.bad {
+    color: #d85c69;
+}
+
+/* =========================
+   小姐姐區域
+========================= */
+
+.girl-area {
+    position: relative;
+
+    min-height: 560px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background:
+        radial-gradient(circle at 70% 20%, #fff8ee, transparent 30%),
+        linear-gradient(#f9d8d5, #f5c7bc);
+
+    box-shadow: 0 8px 25px rgba(100,60,30,.12);
+}
+
+/* =========================
+   漫畫小姐姐
+========================= */
+
+.girl {
+    position: relative;
+
+    width: 330px;
+    height: 470px;
+
+    transition: .3s;
+}
+
+.hair {
+    position: absolute;
+
+    top: 30px;
+    left: 20px;
+
+    width: 290px;
+    height: 270px;
+
+    background: #ef9eb3;
+
+    border-radius:
+        48% 48% 45% 45%;
+
+    box-shadow:
+        inset -15px -5px 0 rgba(190,90,120,.12);
+}
+
+.hair::before {
+    content: "";
+
+    position: absolute;
+
+    top: -35px;
+    left: 100px;
+
+    width: 100px;
+    height: 100px;
+
+    background: #ef9eb3;
+
+    border-radius: 50%;
+}
+
+.face {
+    position: absolute;
+
+    top: 100px;
+    left: 65px;
+
+    width: 200px;
+    height: 205px;
+
+    background: #ffe5d4;
+
+    border-radius: 48% 48% 45% 45%;
+}
+
+.eye {
+    position: absolute;
+
+    top: 65px;
+
+    width: 42px;
+    height: 48px;
+
+    background: white;
+
+    border: 4px solid #553b35;
+
+    border-radius: 50%;
+}
+
+.eye::after {
+    content: "";
+
+    position: absolute;
+
+    width: 17px;
+    height: 23px;
+
+    background: #6b7b50;
+
+    border-radius: 50%;
+
+    left: 8px;
+    top: 9px;
+}
+
+.eye.left {
+    left: 42px;
+}
+
+.eye.right {
+    right: 42px;
+}
+
+.glasses {
+    position: absolute;
+
+    top: 57px;
+    left: 27px;
+
+    width: 150px;
+    height: 58px;
+
+    border-top: 5px solid #423b3a;
+
+    z-index: 5;
+}
+
+.glasses::before,
+.glasses::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 65px;
+    height: 55px;
+
+    border: 5px solid #423b3a;
+
+    border-radius: 50%;
+}
+
+.glasses::before {
+    left: 0;
+}
+
+.glasses::after {
+    right: 0;
+}
+
+.nose {
+    position: absolute;
+
+    top: 120px;
+    left: 98px;
+
+    width: 5px;
+    height: 15px;
+
+    background: #d69b83;
+
+    border-radius: 50%;
+}
+
+.mouth {
+    position: absolute;
+
+    top: 145px;
+    left: 82px;
+
+    width: 40px;
+    height: 18px;
+
+    border-bottom: 5px solid #b84d63;
+
+    border-radius: 50%;
+}
+
+.body {
+    position: absolute;
+
+    bottom: 0;
+    left: 35px;
+
+    width: 260px;
+    height: 190px;
+
+    background: #4e4556;
+
+    border-radius: 50px 50px 0 0;
+}
+
+.collar {
+    position: absolute;
+
+    top: 0;
+    left: 85px;
+
+    width: 90px;
+    height: 65px;
+
+    background: #efe3d1;
+
+    clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+}
+
+.arm {
+    position: absolute;
+
+    bottom: 50px;
+
+    width: 90px;
+    height: 35px;
+
+    background: #ffe5d4;
+
+    border-radius: 30px;
+}
+
+.arm.left {
+    left: 0;
+
+    transform: rotate(25deg);
+}
+
+.arm.right {
+    right: 0;
+
+    transform: rotate(-25deg);
+}
+
+/* =========================
+   珍珠奶茶
+========================= */
+
+.drink {
+    position: absolute;
+
+    bottom: 40px;
+
+    left: 110px;
+
+    width: 110px;
+
+    height: 170px;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.35),
+            rgba(255,255,255,.05)
+        ),
+        #d9a777;
+
+    border: 5px solid #80583d;
+
+    border-radius: 10px 10px 25px 25px;
+
+    z-index: 10;
+
+    transition: .5s;
+
+    display: none;
+}
+
+.drink::before {
+    content: "";
+
+    position: absolute;
+
+    top: -22px;
+
+    left: 35px;
+
+    width: 35px;
+
+    height: 25px;
+
+    background: #eee;
+
+    border-radius: 10px 10px 0 0;
+}
+
+.straw {
+    position: absolute;
+
+    top: -90px;
+
+    left: 60px;
+
+    width: 13px;
+
+    height: 110px;
+
+    background: #6d5146;
+
+    transform: rotate(5deg);
+}
+
+.pearls {
+    position: absolute;
+
+    bottom: 10px;
+
+    left: 10px;
+
+    right: 10px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 6px;
+}
+
+.pearl {
+    width: 22px;
+    height: 22px;
+
+    background: #54352a;
+
+    border-radius: 50%;
+
+    box-shadow:
+        inset 3px 3px 3px rgba(255,255,255,.25);
+}
+
+/* =========================
+   珍珠進度
+========================= */
+
+.pearl-box {
+
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    background: rgba(255,255,255,.9);
+
+    padding: 15px 20px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+.pearl-progress {
+
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: 8px;
+}
+
+.pearl-mini {
+
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    background: #ead8cf;
+
+    border: 2px solid #a88370;
+}
+
+.pearl-mini.active {
+    background: #56352b;
+}
+
+/* =========================
+   底部
+========================= */
+
+.bottom {
+
+    margin-top: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: rgba(255,255,255,.8);
+
+    padding: 12px 20px;
+
+    border-radius: 20px;
+}
+
+.words {
+
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.word {
+
+    padding: 7px 12px;
+
+    border-radius: 10px;
+
+    background: #f3e2d4;
+
+    font-family: "KaiTi", serif;
+
+    font-size: 22px;
+}
+
+.word.locked {
+    opacity: .45;
+}
+
+.next {
+
+    border: none;
+
+    background: #ef7c8d;
+
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    padding: 14px 30px;
+
+    border-radius: 18px;
+}
+
+/* =========================
+   完成畫面
+========================= */
+
+.finish {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(80,45,35,.6);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 100;
+}
+
+.finish-card {
+
+    background: #fffaf5;
+
+    width: min(90%, 600px);
+
+    padding: 40px;
+
+    border-radius: 35px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 50px rgba(0,0,0,.3);
+
+    animation: pop .5s ease;
+}
+
+@keyframes pop {
+
+    from {
+        transform: scale(.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+.finish-card h1 {
+
+    font-size: 42px;
+
+    color: #e87588;
+}
+
+.big-drink {
+
+    font-size: 120px;
+
+    margin: 15px;
+}
+
+.restart {
+
+    border: none;
+
+    background: #ef7c8d;
+
+    color: white;
+
+    padding: 15px 35px;
+
+    border-radius: 20px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+/* =========================
+   RWD
+========================= */
+
+@media(max-width: 850px) {
+
+    .main {
+        grid-template-columns: 1fr;
+    }
+
+    .girl-area {
+        min-height: 520px;
+    }
+
+    .title {
+        font-size: 25px;
+    }
+
+    .status {
+        padding: 10px;
+        gap: 10px;
+    }
+
+}
+
+@media(max-width: 500px) {
+
+    .game {
+        padding: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .character {
+        width: 180px;
+        height: 180px;
+        font-size: 110px;
+    }
+
+    .answers {
+        gap: 8px;
+    }
+
+    .answer {
+        font-size: 34px;
+    }
+
+}
+
+</style>
 </head>
-<body class="min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 text-amber-950 select-none overflow-x-hidden">
 
-    <header class="w-full max-w-4xl flex justify-between items-center bg-white/90 backdrop-blur-md px-4 py-3 rounded-3xl shadow-lg border-2 border-amber-200 z-10">
-        <div class="flex items-center space-x-2">
-            <span class="text-3xl sm:text-4xl">🧋</span>
-            <div>
-                <h1 class="title-font text-base sm:text-xl text-amber-800 tracking-wide">日系少女的珍奶小舖</h1>
-                <p class="text-xs text-amber-600 font-medium">聽語音選漢字 • 收集5顆珍珠做給客人！</p>
+<body>
+
+<div class="game">
+
+    <!-- 標題 -->
+
+    <header class="header">
+
+        <div class="title">
+            🧋 珍珠奶茶<span>學漢字</span>
+        </div>
+
+        <div class="status">
+
+            <div class="status-item">
+                <div class="status-label">⭐ 分數</div>
+                <div class="status-number" id="score">0</div>
             </div>
+
+            <div class="status-item">
+                <div class="status-label">🏆 關卡</div>
+                <div class="status-number" id="levelText">1 / 3</div>
+            </div>
+
         </div>
 
-        <!-- Level Selector -->
-        <div class="flex items-center space-x-1 sm:space-x-2 bg-amber-50 p-1.5 rounded-2xl border border-amber-200">
-            <button onclick="setLevel(1)" id="lvl-1-btn" class="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md">初級(4選)</button>
-            <button onclick="setLevel(2)" id="lvl-2-btn" class="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">中級(6選)</button>
-            <button onclick="setLevel(3)" id="lvl-3-btn" class="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">高級(9選)</button>
-        </div>
     </header>
 
-    <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-4 my-3 items-center flex-1">
-        
-        <!-- Left Side: Anime Girl & Boba Cup Counter (5 Cols) -->
-        <section class="md:col-span-5 flex flex-col items-center justify-center bg-amber-100/60 backdrop-blur-sm p-4 rounded-3xl border-2 border-amber-200 shadow-md relative min-h-[380px]">
-            
-            <!-- Speech Bubble from Shopkeeper (NO TEXT HINT) -->
-            <div class="relative bg-white border-2 border-amber-400 px-4 py-2.5 rounded-2xl shadow-md mb-2 w-full max-w-xs text-center animate-float">
-                <p id="speech-text" class="text-xs sm:text-sm font-bold text-amber-900 flex items-center justify-center gap-1">
-                    <span>歡迎光臨！請點擊右邊聽發音找字！</span> 🎧
-                </p>
-                <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-r-2 border-b-2 border-amber-400 rotate-45"></div>
+
+    <!-- 主遊戲 -->
+
+    <main class="main">
+
+        <!-- 左邊 -->
+
+        <section class="quiz-card">
+
+            <div class="level" id="levelName">
+                第一關
             </div>
 
-            <!-- Anime Girl with Round Glasses & Twin Tails Style SVG -->
-            <div class="relative w-44 h-48 sm:w-52 sm:h-56 flex justify-center items-center">
-                <svg id="shopkeeper-svg" viewBox="0 0 200 220" class="w-full h-full drop-shadow-xl transition-all duration-300">
-                    <!-- Twin Tails Hair (Back) -->
-                    <path d="M 35,75 Q 15,105 25,155 Q 35,115 50,85 Z" fill="#4B3621"/>
-                    <path d="M 165,75 Q 185,105 175,155 Q 165,115 150,85 Z" fill="#4B3621"/>
-                    <circle cx="43" cy="75" r="8" fill="#F43F5E"/>
-                    <circle cx="157" cy="75" r="8" fill="#F43F5E"/>
-
-                    <!-- Uniform / Maid Apron -->
-                    <path d="M 55,135 Q 100,125 145,135 L 160,220 L 40,220 Z" fill="#334155"/>
-                    <path d="M 75,140 L 125,140 L 135,220 L 65,220 Z" fill="#FFF1F2"/>
-                    <path d="M 90,145 L 110,145 L 115,220 L 85,220 Z" fill="#FB7185"/>
-                    <!-- Cup Icon on Apron -->
-                    <circle cx="100" cy="180" r="9" fill="#F59E0B"/>
-
-                    <!-- Head Base -->
-                    <ellipse cx="100" cy="90" rx="46" ry="42" fill="#FFDFC4"/>
-
-                    <!-- Front Bangs Hair -->
-                    <path d="M 54,80 C 50,45 150,45 146,80 C 130,60 115,75 100,65 C 85,75 70,60 54,80 Z" fill="#5C4033"/>
-
-                    <!-- CUTE ROUND GLASSES -->
-                    <g id="glasses-group">
-                        <circle cx="78" cy="90" r="16" fill="none" stroke="#334155" stroke-width="2.5"/>
-                        <circle cx="122" cy="90" r="16" fill="none" stroke="#334155" stroke-width="2.5"/>
-                        <line x1="94" y1="90" x2="106" y2="90" stroke="#334155" stroke-width="2.5"/>
-                    </g>
-
-                    <!-- EYES EXPRESSIONS -->
-                    <g id="face-happy" class="transition-opacity duration-300">
-                        <path d="M 68,88 Q 78,78 88,88" fill="none" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
-                        <path d="M 112,88 Q 122,78 132,88" fill="none" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
-                        <ellipse cx="66" cy="97" rx="6" ry="3" fill="#FDA4AF" opacity="0.7"/>
-                        <ellipse cx="134" cy="97" rx="6" ry="3" fill="#FDA4AF" opacity="0.7"/>
-                        <path d="M 88,102 Q 100,116 112,102 Z" fill="#E11D48"/>
-                    </g>
-
-                    <g id="face-sad" class="hidden transition-opacity duration-300">
-                        <path d="M 68,85 L 86,93 M 68,93 L 86,85" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
-                        <path d="M 114,85 L 132,93 M 114,93 L 132,85" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
-                        <path d="M 140,72 Q 146,78 142,82 Q 138,82 140,72 Z" fill="#38BDF8"/>
-                        <path d="M 90,108 Q 100,100 110,108" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
-                    </g>
-
-                    <g id="face-excited" class="hidden transition-opacity duration-300">
-                        <text x="68" y="94" font-size="16" fill="#F59E0B">★</text>
-                        <text x="114" y="94" font-size="16" fill="#F59E0B">★</text>
-                        <circle cx="66" cy="97" rx="7" ry="3.5" fill="#E11D48" opacity="0.8"/>
-                        <circle cx="134" cy="97" rx="7" ry="3.5" fill="#E11D48" opacity="0.8"/>
-                        <path d="M 85,100 Q 100,124 115,100 Z" fill="#BE123C"/>
-                    </g>
-                </svg>
+            <div class="question-title">
+                🔊 請聽聲音，選出正確的中文字
             </div>
 
-            <!-- Boba Cup & Counter Display -->
-            <div class="mt-2 flex items-center space-x-4 bg-amber-200/50 p-2.5 rounded-2xl border border-amber-300/80 w-full justify-around">
-                <!-- Boba Cup Visual with Thick Straw -->
-                <div class="relative w-20 h-28 glass-cup rounded-b-3xl rounded-t-md overflow-hidden flex flex-col justify-end p-1">
-                    <!-- Thick Boba Straw -->
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-16 bg-gradient-to-r from-rose-400 to-amber-400 rounded-full border border-white z-0 rotate-6 shadow-md"></div>
-                    
-                    <!-- Milk Tea Fluid Level -->
-                    <div id="tea-level" class="w-full tea-fluid rounded-b-2xl transition-all duration-500 z-10 flex flex-wrap-reverse justify-center items-end p-1 gap-1" style="height: 40%;"></div>
+            <div class="character-area">
+
+                <div
+                    class="character"
+                    id="character"
+                >
+                    ？
                 </div>
 
-                <!-- Pearl Progress Stats -->
-                <div class="flex flex-col items-center">
-                    <span class="text-xs font-bold text-amber-700">珍珠收集進度</span>
-                    <div class="flex items-center space-x-1 my-1">
-                        <span id="pearl-count-num" class="text-2xl font-extrabold text-amber-900">0</span>
-                        <span class="text-lg font-bold text-amber-600">/ 5</span>
-                        <span class="text-xl">🧋</span>
-                    </div>
-                    <!-- 5 Pearl Slot Indicators -->
-                    <div id="pearl-slots" class="flex space-x-1">
-                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
-                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
-                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
-                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
-                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="md:col-span-7 flex flex-col items-center justify-between bg-white/95 backdrop-blur-md p-5 rounded-3xl border-2 border-amber-200 shadow-xl min-h-[380px]">
-            
-            <!-- VOICE AUDIO BUTTON (STRICT REQUIREMENT: NO TEXT HINT NEAR IT) -->
-            <div class="w-full flex flex-col items-center my-2">
-                <button id="play-audio-btn" onclick="playCurrentAudio()" class="pulse-audio relative group bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white p-5 rounded-full shadow-lg border-4 border-white transition transform active:scale-95 flex items-center justify-center">
-                    <svg class="w-10 h-10 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-                    </svg>
+                <button
+                    class="sound-button"
+                    onclick="speakCharacter()"
+                >
+                    🔊
                 </button>
+
             </div>
 
-            <!-- Instruction Step 2 -->
-            <div class="w-full border-t border-amber-100 pt-3">
-                <p class="text-center text-xs font-bold text-amber-600 mb-3">請聆聽上方語音，點選對應的繁體中文字：</p>
-                
-                <!-- Dynamic Word Options Grid -->
-                <div id="options-grid" class="grid grid-cols-2 gap-3 w-full max-w-md mx-auto"></div>
+
+            <div
+                class="answers"
+                id="answers"
+            ></div>
+
+
+            <div
+                class="feedback"
+                id="feedback"
+            >
             </div>
 
         </section>
+
+
+        <!-- 右邊小姐姐 -->
+
+        <section class="girl-area">
+
+            <div class="pearl-box">
+
+                🧋 珍珠進度
+
+                <div
+                    class="pearl-progress"
+                    id="pearlProgress"
+                >
+                </div>
+
+            </div>
+
+
+            <div class="girl">
+
+                <div class="hair"></div>
+
+                <div class="face">
+
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+
+                    <div class="glasses"></div>
+
+                    <div class="nose"></div>
+
+                    <div
+                        class="mouth"
+                        id="mouth"
+                    ></div>
+
+                </div>
+
+                <div class="body">
+
+                    <div class="collar"></div>
+
+                </div>
+
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+
+                <!-- 完成後出現 -->
+
+                <div
+                    class="drink"
+                    id="drink"
+                >
+
+                    <div class="straw"></div>
+
+                    <div
+                        class="pearls"
+                        id="drinkPearls"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
     </main>
 
-    <!-- Victory Modal (Shown when 5 pearls gathered & Girl hands over boba) -->
-    <div id="victory-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-50 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-        <div class="bg-gradient-to-b from-amber-50 to-orange-100 border-4 border-amber-400 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl transform scale-90 transition-transform duration-300">
-            <div class="text-6xl mb-2 animate-bounce">🧋✨</div>
-            <h2 class="title-font text-2xl sm:text-3xl text-amber-900 mb-1">珍奶做好了！</h2>
-            <p class="text-amber-700 font-bold text-sm mb-3">少女開心地把插好吸管的珍珠奶茶遞給你！</p>
 
-            <!-- Interactive Handing Over Boba Visual Card -->
-            <div class="bg-white p-4 rounded-2xl border-2 border-amber-300 mb-5 flex flex-col items-center shadow-inner">
-                <div class="text-5xl mb-2">👩‍🍳 ➔ 🥤</div>
-                <p class="text-xs font-bold text-amber-900">「太棒了！這是特別為你做的珍珠奶茶，請慢用！」</p>
-            </div>
+    <!-- 底部 -->
 
-            <button onclick="resetGame()" class="w-full py-3.5 bg-gradient-to-r from-emerald-400 to-green-500 text-white font-extrabold text-lg rounded-2xl shadow-lg border-2 border-white hover:brightness-105 active:scale-95 transition">
-                再做一杯珍奶 ➔
-            </button>
-        </div>
+    <div class="bottom">
+
+        <div
+            class="words"
+            id="words"
+        ></div>
+
+        <button
+            class="next"
+            onclick="nextQuestion()"
+            id="nextButton"
+        >
+            下一題 ➜
+        </button>
+
     </div>
 
-    <!-- Footer Info -->
-    <footer class="text-xs text-amber-600 font-medium py-1">
-        專為海外兒童設計 • 繁體中文聽力記憶自主學習
-    </footer>
+</div>
 
-    <script>
-        // Target Character Set
-        const CHAR_SET = ['人', '口', '大', '小', '土', '力', '白', '天', '山', '日', '月', '中', '文', '上', '下'];
 
-        // Game State Variables
-        let currentLevel = 1; // 1: Easy (4 options), 2: Medium (6 options), 3: Hard (9 options)
-        let targetChar = '';
-        let currentOptions = [];
-        let pearlsCollected = 0;
-        let isAnswering = false;
+<!-- 完成視窗 -->
 
-        let audioCtx = null;
+<div
+    class="finish"
+    id="finish"
+>
 
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    <div class="finish-card">
+
+        <h1>
+            🎉 太棒了！
+        </h1>
+
+        <div class="big-drink">
+            🧋
+        </div>
+
+        <p style="font-size:25px;">
+            你收集了 5 顆珍珠！
+        </p>
+
+        <p style="font-size:22px;">
+            小姐姐做好了珍珠奶茶送給你！
+        </p>
+
+        <button
+            class="restart"
+            onclick="restartGame()"
+        >
+            再玩一次
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   遊戲資料
+===================================================== */
+
+const allCharacters = [
+    "人",
+    "口",
+    "大",
+    "小",
+    "土",
+    "力",
+    "白",
+    "天",
+    "山",
+    "日",
+    "月",
+    "中",
+    "文",
+    "上",
+    "下"
+];
+
+
+/* =====================================================
+   三個難度
+===================================================== */
+
+const levels = [
+
+    {
+        name: "第一關",
+        characters: [
+            "人",
+            "口",
+            "大",
+            "小",
+            "土"
+        ]
+    },
+
+    {
+        name: "第二關",
+        characters: [
+            "力",
+            "白",
+            "天",
+            "山",
+            "日"
+        ]
+    },
+
+    {
+        name: "第三關",
+        characters: [
+            "月",
+            "中",
+            "文",
+            "上",
+            "下"
+        ]
+    }
+
+];
+
+
+/* =====================================================
+   遊戲狀態
+===================================================== */
+
+let currentLevel = 0;
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let pearls = 0;
+
+let currentAnswer = "";
+
+let answered = false;
+
+
+/* =====================================================
+   開始遊戲
+===================================================== */
+
+function startGame() {
+
+    currentLevel = 0;
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    pearls = 0;
+
+    answered = false;
+
+    updateScore();
+
+    createPearls();
+
+    showQuestion();
+
+}
+
+
+/* =====================================================
+   顯示題目
+===================================================== */
+
+function showQuestion() {
+
+    answered = false;
+
+    const level =
+        levels[currentLevel];
+
+    const characters =
+        level.characters;
+
+    currentAnswer =
+        characters[currentQuestion];
+
+    document.getElementById("levelName")
+        .textContent =
+        level.name;
+
+    document.getElementById("levelText")
+        .textContent =
+        `${currentLevel + 1} / 3`;
+
+    document.getElementById("character")
+        .textContent =
+        currentAnswer;
+
+    document.getElementById("feedback")
+        .textContent = "";
+
+    document.getElementById("feedback")
+        .className =
+        "feedback";
+
+
+    /* 小姐姐恢復正常表情 */
+
+    happyFace();
+
+
+    /* 產生答案 */
+
+    createAnswers(
+        currentAnswer,
+        characters
+    );
+
+
+    /* 底部字詞 */
+
+    createWordBar();
+
+}
+
+
+/* =====================================================
+   產生選項
+===================================================== */
+
+function createAnswers(
+    correct,
+    characterList
+) {
+
+    const answers =
+        document.getElementById("answers");
+
+    answers.innerHTML = "";
+
+
+    let choices =
+        [...characterList];
+
+
+    /* 洗牌 */
+
+    choices.sort(
+        () => Math.random() - .5
+    );
+
+
+    choices.forEach(character => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "answer";
+
+        button.textContent =
+            character;
+
+        button.onclick =
+            () => checkAnswer(
+                character,
+                button
+            );
+
+        answers.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   判斷答案
+===================================================== */
+
+function checkAnswer(
+    selected,
+    button
+) {
+
+    if (answered) return;
+
+    answered = true;
+
+
+    if (selected === currentAnswer) {
+
+        /* 答對 */
+
+        button.classList.add("correct");
+
+        score += 10;
+
+        pearls++;
+
+        updateScore();
+
+        updatePearls();
+
+        document.getElementById("feedback")
+            .textContent =
+            "😊 答對了！真棒！";
+
+        document.getElementById("feedback")
+            .className =
+            "feedback good";
+
+        happyFace();
+
+
+        /* 語音鼓勵 */
+
+        speakText("答對了，真棒！");
+
+
+        /* 第五顆珍珠 */
+
+        if (pearls >= 5) {
+
+            setTimeout(
+                finishGame,
+                900
+            );
+
+        }
+
+    } else {
+
+        /* 答錯 */
+
+        button.classList.add("wrong");
+
+        document.getElementById("feedback")
+            .textContent =
+            "😢 再試一次看看！";
+
+        document.getElementById("feedback")
+            .className =
+            "feedback bad";
+
+        sadFace();
+
+        speakText("再試一次看看");
+
+        answered = false;
+
+    }
+
+}
+
+
+/* =====================================================
+   下一題
+===================================================== */
+
+function nextQuestion() {
+
+    if (!answered) {
+
+        return;
+
+    }
+
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        levels[currentLevel].characters.length
+    ) {
+
+        currentQuestion = 0;
+
+        currentLevel++;
+
+        if (
+            currentLevel >= levels.length
+        ) {
+
+            currentLevel = 0;
+
+        }
+
+    }
+
+
+    showQuestion();
+
+}
+
+
+/* =====================================================
+   語音
+===================================================== */
+
+function speakCharacter() {
+
+    speakText(
+        currentAnswer
+    );
+
+}
+
+
+function speakText(text) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        alert(
+            "你的瀏覽器不支援語音功能"
+        );
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+    speech.lang =
+        "zh-TW";
+
+    speech.rate =
+        0.8;
+
+    speech.pitch =
+        1.1;
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+/* =====================================================
+   分數
+===================================================== */
+
+function updateScore() {
+
+    document.getElementById("score")
+        .textContent =
+        score;
+
+}
+
+
+/* =====================================================
+   珍珠
+===================================================== */
+
+function createPearls() {
+
+    const box =
+        document.getElementById(
+            "pearlProgress"
+        );
+
+    box.innerHTML = "";
+
+
+    for (
+        let i = 0;
+        i < 5;
+        i++
+    ) {
+
+        const pearl =
+            document.createElement("div");
+
+        pearl.className =
+            "pearl-mini";
+
+        box.appendChild(
+            pearl
+        );
+
+    }
+
+}
+
+
+function updatePearls() {
+
+    const pearlsUI =
+        document.querySelectorAll(
+            ".pearl-mini"
+        );
+
+
+    pearlsUI.forEach(
+        (pearl, index) => {
+
+            if (
+                index < pearls
+            ) {
+
+                pearl.classList.add(
+                    "active"
+                );
+
             }
+
         }
+    );
 
-        function playTone(freq, duration, type='sine') {
-            try {
-                initAudio();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch(e) {}
-        }
 
-        function playCorrectSound() {
-            playTone(523.25, 0.15);
-            setTimeout(() => playTone(659.25, 0.15), 100);
-            setTimeout(() => playTone(783.99, 0.3), 200);
-        }
+    /* 杯子裡的珍珠 */
 
-        function playWrongSound() {
-            playTone(220, 0.2, 'sawtooth');
-            setTimeout(() => playTone(180, 0.3, 'sawtooth'), 150);
-        }
+    const drinkPearls =
+        document.getElementById(
+            "drinkPearls"
+        );
 
-        function playVictoryFanfare() {
-            const notes = [523.25, 659.25, 783.99, 1046.50];
-            notes.forEach((freq, idx) => {
-                setTimeout(() => playTone(freq, 0.25, 'triangle'), idx * 120);
-            });
-        }
+    drinkPearls.innerHTML = "";
 
-        function speakChineseChar(char) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(char);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.8;
-                utterance.pitch = 1.1;
-                window.speechSynthesis.speak(utterance);
-            }
-        }
 
-        function setLevel(lvl) {
-            currentLevel = lvl;
-            [1, 2, 3].forEach(i => {
-                const btn = document.getElementById(`lvl-${i}-btn`);
-                if (i === lvl) {
-                    btn.className = "px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md";
-                } else {
-                    btn.className = "px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200";
-                }
-            });
-            nextRound();
-        }
+    for (
+        let i = 0;
+        i < pearls;
+        i++
+    ) {
 
-        function setExpression(expr) {
-            document.getElementById('face-happy').classList.add('hidden');
-            document.getElementById('face-sad').classList.add('hidden');
-            document.getElementById('face-excited').classList.add('hidden');
+        const pearl =
+            document.createElement(
+                "div"
+            );
 
-            if (expr === 'happy') {
-                document.getElementById('face-happy').classList.remove('hidden');
-            } else if (expr === 'sad') {
-                document.getElementById('face-sad').classList.remove('hidden');
-            } else if (expr === 'excited') {
-                document.getElementById('face-excited').classList.remove('hidden');
-            }
-        }
+        pearl.className =
+            "pearl";
 
-        function nextRound() {
-            isAnswering = false;
-            const randIdx = Math.floor(Math.random() * CHAR_SET.length);
-            targetChar = CHAR_SET[randIdx];
+        drinkPearls.appendChild(
+            pearl
+        );
 
-            let count = 4;
-            if (currentLevel === 2) count = 6;
-            if (currentLevel === 3) count = 9;
+    }
 
-            let optionsSet = new Set([targetChar]);
-            while (optionsSet.size < count) {
-                const randomDistractor = CHAR_SET[Math.floor(Math.random() * CHAR_SET.length)];
-                optionsSet.add(randomDistractor);
-            }
+}
 
-            currentOptions = Array.from(optionsSet).sort(() => Math.random() - 0.5);
-            renderOptionsGrid();
 
-            document.getElementById('speech-text').innerHTML = `<span>請點擊上方喇叭聽題目！</span> 🎧`;
+/* =====================================================
+   小姐姐表情
+===================================================== */
 
-            setTimeout(() => {
-                playCurrentAudio();
-            }, 300);
-        }
+function happyFace() {
 
-        function playCurrentAudio() {
-            initAudio();
-            speakChineseChar(targetChar);
-            const audioBtn = document.getElementById('play-audio-btn');
-            audioBtn.classList.add('scale-110');
-            setTimeout(() => audioBtn.classList.remove('scale-110'), 300);
-        }
+    const mouth =
+        document.getElementById(
+            "mouth"
+        );
 
-        function renderOptionsGrid() {
-            const grid = document.getElementById('options-grid');
-            grid.innerHTML = '';
+    mouth.style.width =
+        "40px";
 
-            if (currentLevel === 1) {
-                grid.className = "grid grid-cols-2 gap-3 w-full max-w-sm mx-auto";
-            } else if (currentLevel === 2) {
-                grid.className = "grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-md mx-auto";
+    mouth.style.height =
+        "18px";
+
+    mouth.style.borderBottom =
+        "5px solid #b84d63";
+
+    mouth.style.borderTop =
+        "none";
+
+}
+
+
+function sadFace() {
+
+    const mouth =
+        document.getElementById(
+            "mouth"
+        );
+
+    mouth.style.width =
+        "38px";
+
+    mouth.style.height =
+        "20px";
+
+    mouth.style.borderBottom =
+        "none";
+
+    mouth.style.borderTop =
+        "5px solid #b84d63";
+
+}
+
+
+/* =====================================================
+   底部漢字
+===================================================== */
+
+function createWordBar() {
+
+    const bar =
+        document.getElementById(
+            "words"
+        );
+
+    bar.innerHTML = "";
+
+
+    allCharacters.forEach(
+        (character, index) => {
+
+            const span =
+                document.createElement(
+                    "span"
+                );
+
+            span.className =
+                "word";
+
+
+            if (
+                index >
+                (currentLevel + 1) * 5 - 1
+            ) {
+
+                span.classList.add(
+                    "locked"
+                );
+
+                span.textContent =
+                    "🔒";
+
             } else {
-                grid.className = "grid grid-cols-3 gap-2 w-full max-w-md mx-auto";
+
+                span.textContent =
+                    character;
+
             }
 
-            currentOptions.forEach(char => {
-                const btn = document.createElement('button');
-                btn.onclick = () => checkAnswer(char, btn);
-                btn.className = `p-3 sm:p-4 bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 hover:border-amber-500 rounded-2xl text-2xl sm:text-3xl font-black text-amber-950 shadow-md hover:shadow-lg transition-all duration-150 transform hover:-translate-y-0.5 active:scale-95 flex justify-center items-center h-16 sm:h-20`;
-                btn.innerText = char;
-                grid.appendChild(btn);
-            });
+
+            bar.appendChild(
+                span
+            );
+
         }
+    );
 
-        function checkAnswer(selectedChar, elementBtn) {
-            if (isAnswering) return;
-            initAudio();
+}
 
-            if (selectedChar === targetChar) {
-                isAnswering = true;
-                playCorrectSound();
-                setExpression('happy');
 
-                elementBtn.className = elementBtn.className.replace('bg-amber-50', 'bg-emerald-400 text-white border-emerald-500 scale-105');
-                document.getElementById('speech-text').innerHTML = `<span class="text-emerald-700 font-extrabold">太棒了！答對了！🎉</span>`;
+/* =====================================================
+   完成遊戲
+===================================================== */
 
-                pearlsCollected++;
-                updateBobaCupVisuals();
+function finishGame() {
 
-                if (pearlsCollected >= 5) {
-                    setTimeout(() => {
-                        playVictoryFanfare();
-                        setExpression('excited');
-                        showVictoryModal();
-                    }, 700);
-                } else {
-                    setTimeout(() => {
-                        nextRound();
-                    }, 1200);
-                }
+    const drink =
+        document.getElementById(
+            "drink"
+        );
 
-            } else {
-                playWrongSound();
-                setExpression('sad');
+    drink.style.display =
+        "block";
 
-                elementBtn.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-600', 'animate-shake');
-                document.getElementById('speech-text').innerHTML = `<span class="text-rose-600 font-extrabold">答錯囉，再聽一次試試！❤️</span>`;
 
-                setTimeout(() => {
-                    elementBtn.classList.remove('animate-shake');
-                }, 500);
-            }
-        }
+    updatePearls();
 
-        function updateBobaCupVisuals() {
-            document.getElementById('pearl-count-num').innerText = pearlsCollected;
-            const teaLevel = document.getElementById('tea-level');
-            teaLevel.style.height = `${40 + (pearlsCollected * 10)}%`;
 
-            const newPearl = document.createElement('div');
-            newPearl.className = "w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-br from-gray-700 via-gray-900 to-black rounded-full border border-gray-600 shadow-md animate-pearl m-0.5";
-            teaLevel.appendChild(newPearl);
+    setTimeout(() => {
 
-            const slotsContainer = document.getElementById('pearl-slots');
-            const slots = slotsContainer.children;
-            for (let i = 0; i < 5; i++) {
-                if (i < pearlsCollected) {
-                    slots[i].className = "w-4 h-4 rounded-full border-2 border-amber-600 bg-gray-900 shadow-inner";
-                } else {
-                    slots[i].className = "w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100";
-                }
-            }
-        }
+        document.getElementById(
+            "finish"
+        ).style.display =
+            "flex";
 
-        function showVictoryModal() {
-            const modal = document.getElementById('victory-modal');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('opacity-100');
-        }
+        speakText(
+            "太棒了！你收集了五顆珍珠！"
+        );
 
-        function resetGame() {
-            pearlsCollected = 0;
-            document.getElementById('tea-level').innerHTML = '';
-            updateBobaCupVisuals();
+    }, 500);
 
-            const modal = document.getElementById('victory-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.classList.remove('opacity-100');
+}
 
-            setExpression('happy');
-            nextRound();
-        }
 
-        window.onload = () => {
-            nextRound();
-        };
-    </script>
+/* =====================================================
+   重新開始
+===================================================== */
+
+function restartGame() {
+
+    document.getElementById(
+        "finish"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "drink"
+    ).style.display =
+        "none";
+
+
+    startGame();
+
+}
+
+
+/* =====================================================
+   啟動
+===================================================== */
+
+startGame();
+
+</script>
+
 </body>
 </html>
