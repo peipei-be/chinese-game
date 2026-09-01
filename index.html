@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日系風珍珠奶茶 - 繁體中文聽音辨字</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500;700&family=Mochiy+Pop+One&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', 'Kiwi Maru', sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 50%, #fef3c7 100%);
+            touch-action: manipulation;
+        }
+        .title-font {
+            font-family: 'Mochiy Pop One', 'Noto Sans TC', cursive;
+        }
+        /* Boba Cup Glass Glassmorphism */
+        .glass-cup {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(8px);
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 30px rgba(180, 83, 9, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+        /* Milk Tea Fluid Gradient */
+        .tea-fluid {
+            background: linear-gradient(180deg, #fef08a 0%, #fde047 10%, #f59e0b 60%, #d97706 100%);
+            box-shadow: inset 0 5px 15px rgba(255, 255, 255, 0.5);
+        }
+        /* Pearl Drop Animation */
+        @keyframes pearlDrop {
+            0% { transform: translateY(-120px) scale(0.3); opacity: 0; }
+            60% { transform: translateY(10px) scale(1.1); opacity: 1; }
+            80% { transform: translateY(-4px) scale(0.95); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        .animate-pearl {
+            animation: pearlDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        /* Sound Pulse Wave */
+        @keyframes soundWave {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 18px rgba(245, 158, 11, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+        .pulse-audio {
+            animation: soundWave 2s infinite;
+        }
+        /* Bounce & Shake */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+        /* Floating animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 text-amber-950 select-none overflow-x-hidden">
+
+    <!-- Top Header Navigation -->
+    <header class="w-full max-w-4xl flex justify-between items-center bg-white/80 backdrop-blur-md px-4 py-3 rounded-3xl shadow-lg border-2 border-amber-200 z-10">
+        <div class="flex items-center space-x-2">
+            <span class="text-3xl sm:text-4xl">🧋</span>
+            <div>
+                <h1 class="title-font text-lg sm:text-2xl text-amber-800 tracking-wide">日式珍奶學中文</h1>
+                <p class="text-xs text-amber-600 font-medium">聽語音選漢字 • 收集5顆珍珠做珍奶！</p>
+            </div>
+        </div>
+
+        <!-- Level Selector -->
+        <div class="flex items-center space-x-1 sm:space-x-2 bg-amber-50 p-1.5 rounded-2xl border border-amber-200">
+            <button onclick="setLevel(1)" id="lvl-1-btn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md">初級 (4選1)</button>
+            <button onclick="setLevel(2)" id="lvl-2-btn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">中級 (6選1)</button>
+            <button onclick="setLevel(3)" id="lvl-3-btn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200">高級 (9選1)</button>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-4 my-3 items-center flex-1">
+        
+        <!-- Left Side: Anime Shopkeeper Girl & Boba Cup Counter (5 Cols) -->
+        <section class="md:col-span-5 flex flex-col items-center justify-center bg-amber-100/60 backdrop-blur-sm p-4 rounded-3xl border-2 border-amber-200/80 shadow-md relative min-h-[360px]">
+            
+            <!-- Speech Bubble from Shopkeeper (STRICTLY NO TEXT HINT OF ANSWER) -->
+            <div class="relative bg-white border-2 border-amber-400 px-4 py-2.5 rounded-2xl shadow-md mb-2 w-full max-w-xs text-center animate-float">
+                <p id="speech-text" class="text-xs sm:text-sm font-bold text-amber-900 flex items-center justify-center gap-1">
+                    <span>點擊右邊聽發音找字喔！</span> 🎧
+                </p>
+                <!-- Tail for speech bubble -->
+                <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-r-2 border-b-2 border-amber-400 rotate-45"></div>
+            </div>
+
+            <!-- Shopkeeper Anime Character SVG -->
+            <div class="relative w-44 h-48 sm:w-52 sm:h-56 flex justify-center items-center">
+                <svg id="shopkeeper-svg" viewBox="0 0 200 220" class="w-full h-full drop-shadow-xl transition-all duration-300">
+                    <!-- Twin Tails Hair (Back) -->
+                    <path d="M 35,80 Q 15,110 25,160 Q 35,120 50,90 Z" fill="#5D4037"/>
+                    <path d="M 165,80 Q 185,110 175,160 Q 165,120 150,90 Z" fill="#5D4037"/>
+                    <!-- Hair Ribbons -->
+                    <circle cx="45" cy="80" r="8" fill="#F43F5E"/>
+                    <circle cx="155" cy="80" r="8" fill="#F43F5E"/>
+
+                    <!-- Body & Maid Apron -->
+                    <path d="M 60,140 Q 100,130 140,140 L 155,220 L 45,220 Z" fill="#FFF1F2"/>
+                    <path d="M 75,145 L 125,145 L 135,220 L 65,220 Z" fill="#FB7185"/> <!-- Pink Collar/Apron -->
+                    <path d="M 90,150 L 110,150 L 115,220 L 85,220 Z" fill="#FFF"/> <!-- White Center -->
+                    <!-- Apron Boba Badge -->
+                    <circle cx="100" cy="180" r="10" fill="#F59E0B"/>
+                    <circle cx="97" cy="182" r="2" fill="#374151"/>
+                    <circle cx="103" cy="182" r="2" fill="#374151"/>
+                    <circle cx="100" cy="177" r="2" fill="#374151"/>
+
+                    <!-- Head Base -->
+                    <ellipse cx="100" cy="95" rx="48" ry="44" fill="#FFDFC4"/>
+
+                    <!-- Bangs Hair (Front) -->
+                    <path d="M 52,85 C 50,50 150,50 148,85 C 130,65 115,80 100,70 C 85,80 70,65 52,85 Z" fill="#6D4C41"/>
+
+                    <!-- EYES LAYER (Dynamic ID for Expressions) -->
+                    <g id="face-happy" class="transition-opacity duration-300">
+                        <!-- Happy Curved Eyes -->
+                        <path d="M 72,92 Q 82,82 90,92" fill="none" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 110,92 Q 118,82 128,92" fill="none" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Blush -->
+                        <ellipse cx="68" cy="102" rx="8" ry="4" fill="#FB7185" opacity="0.6"/>
+                        <ellipse cx="132" cy="102" rx="8" ry="4" fill="#FB7185" opacity="0.6"/>
+                        <!-- Smile Mouth -->
+                        <path d="M 88,106 Q 100,122 112,106 Z" fill="#F43F5E"/>
+                    </g>
+
+                    <g id="face-sad" class="hidden transition-opacity duration-300">
+                        <!-- Sad / Disappointed Eyes (> <) -->
+                        <path d="M 72,88 L 88,96 M 72,96 L 88,88" fill="none" stroke="#4B5563" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M 112,88 L 128,96 M 112,96 L 128,88" fill="none" stroke="#4B5563" stroke-width="3.5" stroke-linecap="round"/>
+                        <!-- Sweat Drop -->
+                        <path d="M 142,75 Q 148,82 144,86 Q 140,86 142,75 Z" fill="#38BDF8"/>
+                        <!-- Disappointed Mouth -->
+                        <path d="M 90,112 Q 100,104 110,112" fill="none" stroke="#4B5563" stroke-width="3.5" stroke-linecap="round"/>
+                    </g>
+
+                    <g id="face-excited" class="hidden transition-opacity duration-300">
+                        <!-- Sparkling Star Eyes -->
+                        <text x="70" y="98" font-size="18" fill="#F59E0B">★</text>
+                        <text x="110" y="98" font-size="18" fill="#F59E0B">★</text>
+                        <!-- Big Blush -->
+                        <circle cx="68" cy="102" r="7" fill="#F43F5E" opacity="0.7"/>
+                        <circle cx="132" cy="102" r="7" fill="#F43F5E" opacity="0.7"/>
+                        <!-- Big Open Joyful Mouth -->
+                        <path d="M 85,104 Q 100,130 115,104 Z" fill="#E11D48"/>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Boba Cup & Counter Display -->
+            <div class="mt-2 flex items-center space-x-4 bg-amber-200/50 p-2.5 rounded-2xl border border-amber-300/80 w-full justify-around">
+                <!-- Boba Cup Visual -->
+                <div class="relative w-20 h-28 glass-cup rounded-b-3xl rounded-t-md overflow-hidden flex flex-col justify-end p-1">
+                    <!-- Straw -->
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-3 h-14 bg-amber-300 rounded-full border border-amber-400 z-0 rotate-6"></div>
+                    
+                    <!-- Milk Tea Fill Level based on pearls count -->
+                    <div id="tea-level" class="w-full tea-fluid rounded-b-2xl transition-all duration-500 z-10 flex flex-wrap-reverse justify-center items-end p-1 gap-1" style="height: 40%;">
+                        <!-- Dynamic Pearl Elements will be placed here -->
+                    </div>
+                </div>
+
+                <!-- Pearl Progress Stats -->
+                <div class="flex flex-col items-center">
+                    <span class="text-xs font-bold text-amber-700">珍珠收集進度</span>
+                    <div class="flex items-center space-x-1 my-1">
+                        <span id="pearl-count-num" class="text-2xl font-extrabold text-amber-900">0</span>
+                        <span class="text-lg font-bold text-amber-600">/ 5</span>
+                        <span class="text-xl">🧋</span>
+                    </div>
+                    <!-- 5 Pearl Slot Indicators -->
+                    <div id="pearl-slots" class="flex space-x-1">
+                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
+                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
+                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
+                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
+                        <div class="w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Side: Pure Audio Trigger + Word Selection Board (7 Cols) -->
+        <section class="md:col-span-7 flex flex-col items-center justify-between bg-white/90 backdrop-blur-md p-5 rounded-3xl border-2 border-amber-200 shadow-xl min-h-[360px]">
+            
+            <!-- VOICE AUDIO BUTTON (STRICT REQUIREMENT: NO TEXT HINT NEAR IT) -->
+            <div class="w-full flex flex-col items-center my-2">
+                <span class="text-xs font-bold text-amber-600 mb-1">① 點擊喇叭聽發音 (Listen to Voice)</span>
+                
+                <button id="play-audio-btn" onclick="playCurrentAudio()" class="pulse-audio relative group bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white p-5 rounded-full shadow-lg border-4 border-white transition transform active:scale-95 flex items-center justify-center">
+                    <!-- Big Loudspeaker Icon -->
+                    <svg class="w-10 h-10 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                    </svg>
+                </button>
+                <span class="text-xs font-bold text-amber-800 mt-2 bg-amber-100 px-3 py-1 rounded-full">點我再聽一次音檔 🔊</span>
+            </div>
+
+            <!-- Instruction Step 2 -->
+            <div class="w-full border-t border-amber-100 pt-3">
+                <p class="text-center text-xs font-bold text-amber-600 mb-3">② 聽完聲音後，點選對應的繁體中文字：</p>
+                
+                <!-- Dynamic Word Options Grid -->
+                <div id="options-grid" class="grid grid-cols-2 gap-3 w-full max-w-md mx-auto">
+                    <!-- Dynamic Buttons Generated in JS -->
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Victory Modal (Shown when 5 pearls gathered) -->
+    <div id="victory-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-50 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <div class="bg-gradient-to-b from-amber-50 to-orange-100 border-4 border-amber-400 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl transform scale-90 transition-transform duration-300 id='victory-box'">
+            <div class="text-6xl mb-2 animate-bounce">🧋✨</div>
+            <h2 class="title-font text-2xl sm:text-3xl text-amber-900 mb-2">珍珠奶茶做好了！</h2>
+            <p class="text-amber-700 font-bold text-sm mb-4">太厲害了！好喝的珍奶送給客人囉！</p>
+
+            <!-- Customer Smiling Reaction -->
+            <div class="bg-white/80 p-3 rounded-2xl border border-amber-200 mb-5 flex items-center justify-center space-x-3">
+                <span class="text-4xl">😋</span>
+                <span class="text-xs font-bold text-amber-800 text-left">客人小明：「這杯珍珠奶茶太好喝了！謝謝你！」</span>
+            </div>
+
+            <button onclick="resetGame()" class="w-full py-3.5 bg-gradient-to-r from-emerald-400 to-green-500 text-white font-extrabold text-lg rounded-2xl shadow-lg border-2 border-white hover:brightness-105 active:scale-95 transition">
+                再做一杯珍奶 ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer Copyright/Info -->
+    <footer class="text-xs text-amber-600 font-medium py-2">
+        適合海外兒童 (6-10歲) 繁體中文聽力記憶自主學習
+    </footer>
+
+    <script>
+        // Target Character Set from Request
+        const CHAR_SET = ['人', '口', '大', '小', '土', '力', '白', '天', '山', '日', '月', '中', '文', '上', '下'];
+
+        // Game State Variables
+        let currentLevel = 1; // 1: Easy (4 options), 2: Medium (6 options), 3: Hard (9 options)
+        let targetChar = '';
+        let currentOptions = [];
+        let pearlsCollected = 0;
+        let isAnswering = false;
+
+        // Audio Context Synthesizer (No external sound file dependency)
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Web Audio Synthesizer Effects
+        function playTone(freq, duration, type='sine') {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        function playCorrectSound() {
+            playTone(523.25, 0.15); // C5
+            setTimeout(() => playTone(659.25, 0.15), 100); // E5
+            setTimeout(() => playTone(783.99, 0.3), 200);  // G5
+        }
+
+        function playWrongSound() {
+            playTone(220, 0.2, 'sawtooth'); // A3
+            setTimeout(() => playTone(180, 0.3, 'sawtooth'), 150);
+        }
+
+        function playVictoryFanfare() {
+            const notes = [523.25, 659.25, 783.99, 1046.50];
+            notes.forEach((freq, idx) => {
+                setTimeout(() => playTone(freq, 0.25, 'triangle'), idx * 120);
+            });
+        }
+
+        // Web Speech API Pronunciation (Mandarin zh-TW)
+        function speakChineseChar(char) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop ongoing speech
+                const utterance = new SpeechSynthesisUtterance(char);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.8; // Slightly slower for children clarity
+                utterance.pitch = 1.1; // Friendly tone
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Set Difficulty Level
+        function setLevel(lvl) {
+            currentLevel = lvl;
+            [1, 2, 3].forEach(i => {
+                const btn = document.getElementById(`lvl-${i}-btn`);
+                if (i === lvl) {
+                    btn.className = "px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 bg-amber-500 text-white shadow-md";
+                } else {
+                    btn.className = "px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-bold rounded-xl transition duration-200 text-amber-700 hover:bg-amber-200";
+                }
+            });
+            nextRound();
+        }
+
+        // Change Anime Girl Face Expression
+        function setExpression(expr) {
+            document.getElementById('face-happy').classList.add('hidden');
+            document.getElementById('face-sad').classList.add('hidden');
+            document.getElementById('face-excited').classList.add('hidden');
+
+            if (expr === 'happy') {
+                document.getElementById('face-happy').classList.remove('hidden');
+            } else if (expr === 'sad') {
+                document.getElementById('face-sad').classList.remove('hidden');
+            } else if (expr === 'excited') {
+                document.getElementById('face-excited').classList.remove('hidden');
+            }
+        }
+
+        // Start Next Quiz Round
+        function nextRound() {
+            isAnswering = false;
+            
+            // Pick Random Target Character
+            const randIdx = Math.floor(Math.random() * CHAR_SET.length);
+            targetChar = CHAR_SET[randIdx];
+
+            // Determine option grid count
+            let count = 4;
+            if (currentLevel === 2) count = 6;
+            if (currentLevel === 3) count = 9;
+
+            // Generate Distractors
+            let optionsSet = new Set([targetChar]);
+            while (optionsSet.size < count) {
+                const randomDistractor = CHAR_SET[Math.floor(Math.random() * CHAR_SET.length)];
+                optionsSet.add(randomDistractor);
+            }
+
+            // Shuffle Options
+            currentOptions = Array.from(optionsSet).sort(() => Math.random() - 0.5);
+
+            // Render Option Buttons
+            renderOptionsGrid();
+
+            // Set Speech Bubble Text (NO character name reveal)
+            document.getElementById('speech-text').innerHTML = `<span>按語音鈕聽題目喔！</span> 🎧`;
+
+            // Auto Play Audio for current word
+            setTimeout(() => {
+                playCurrentAudio();
+            }, 300);
+        }
+
+        // Trigger Audio Play back
+        function playCurrentAudio() {
+            initAudio();
+            speakChineseChar(targetChar);
+            
+            // Pulse animation trigger on audio button
+            const audioBtn = document.getElementById('play-audio-btn');
+            audioBtn.classList.add('scale-110');
+            setTimeout(() => audioBtn.classList.remove('scale-110'), 300);
+        }
+
+        // Render Cards Options
+        function renderOptionsGrid() {
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+
+            // Adjust grid CSS cols depending on count
+            if (currentLevel === 1) {
+                grid.className = "grid grid-cols-2 gap-3 w-full max-w-sm mx-auto";
+            } else if (currentLevel === 2) {
+                grid.className = "grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-md mx-auto";
+            } else {
+                grid.className = "grid grid-cols-3 gap-2 w-full max-w-md mx-auto";
+            }
+
+            currentOptions.forEach(char => {
+                const btn = document.createElement('button');
+                btn.onclick = () => checkAnswer(char, btn);
+                btn.className = `p-3 sm:p-4 bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 hover:border-amber-500 rounded-2xl text-2xl sm:text-3xl font-black text-amber-950 shadow-md hover:shadow-lg transition-all duration-150 transform hover:-translate-y-0.5 active:scale-95 flex justify-center items-center h-16 sm:h-20`;
+                btn.innerText = char;
+                grid.appendChild(btn);
+            });
+        }
+
+        // Handle User Answer Selection
+        function checkAnswer(selectedChar, elementBtn) {
+            if (isAnswering) return;
+            initAudio();
+
+            if (selectedChar === targetChar) {
+                // CORRECT ANSWER
+                isAnswering = true;
+                playCorrectSound();
+                setExpression('happy');
+
+                // Button Correct styling
+                elementBtn.className = elementBtn.className.replace('bg-amber-50', 'bg-emerald-400 text-white border-emerald-500 scale-105');
+                
+                // Encourage message
+                document.getElementById('speech-text').innerHTML = `<span class="text-emerald-700 font-extrabold">太棒了！答對了！🎉</span>`;
+
+                // Add Pearl
+                pearlsCollected++;
+                updateBobaCupVisuals();
+
+                if (pearlsCollected >= 5) {
+                    // VICTORY LEVEL COMPLETE!
+                    setTimeout(() => {
+                        playVictoryFanfare();
+                        setExpression('excited');
+                        showVictoryModal();
+                    }, 700);
+                } else {
+                    // Move to Next Round
+                    setTimeout(() => {
+                        nextRound();
+                    }, 1200);
+                }
+
+            } else {
+                // INCORRECT ANSWER
+                playWrongSound();
+                setExpression('sad');
+
+                // Button Wrong visual styling & shake
+                elementBtn.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-600', 'animate-shake');
+                
+                // Disappointed speech bubble text
+                document.getElementById('speech-text').innerHTML = `<span class="text-rose-600 font-extrabold">看錯囉，再試試看！❤️</span>`;
+
+                setTimeout(() => {
+                    elementBtn.classList.remove('animate-shake');
+                }, 500);
+            }
+        }
+
+        // Update Boba Glass Pearls & Progress bar
+        function updateBobaCupVisuals() {
+            // Update Numbers
+            document.getElementById('pearl-count-num').innerText = pearlsCollected;
+
+            // Update Tea Level height percentage
+            const teaLevel = document.getElementById('tea-level');
+            teaLevel.style.height = `${40 + (pearlsCollected * 10)}%`;
+
+            // Append a physical black pearl inside boba glass
+            const newPearl = document.createElement('div');
+            newPearl.className = "w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-br from-gray-700 via-gray-900 to-black rounded-full border border-gray-600 shadow-md animate-pearl m-0.5";
+            teaLevel.appendChild(newPearl);
+
+            // Update bottom 5 slot indicator dots
+            const slotsContainer = document.getElementById('pearl-slots');
+            const slots = slotsContainer.children;
+            for (let i = 0; i < 5; i++) {
+                if (i < pearlsCollected) {
+                    slots[i].className = "w-4 h-4 rounded-full border-2 border-amber-600 bg-gray-900 shadow-inner";
+                } else {
+                    slots[i].className = "w-4 h-4 rounded-full border-2 border-amber-400 bg-amber-100";
+                }
+            }
+        }
+
+        // Show Win Modal
+        function showVictoryModal() {
+            const modal = document.getElementById('victory-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        // Reset Game to start fresh boba cup
+        function resetGame() {
+            pearlsCollected = 0;
+            document.getElementById('tea-level').innerHTML = '';
+            updateBobaCupVisuals();
+
+            const modal = document.getElementById('victory-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+
+            setExpression('happy');
+            nextRound();
+        }
+
+        // Initialize Game On Page Load
+        window.onload = () => {
+            nextRound();
+        };
+    </script>
+</body>
+</html>
